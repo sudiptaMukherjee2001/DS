@@ -41,15 +41,15 @@ struct InstertionOp*  insertAtFront(struct InstertionOp* head ){
     scanf("%d",&newNode->data);
     temp=head;
     if(head!=NULL){
-        newNode->link=temp;
-        temp=newNode;
+        newNode->link=temp; // storing the head node address in the place of newNode Link and We estabhlish a link or connection between newNode with previous head node ..
+        temp=newNode;// store newNode address to the temp  variable
     }else{
         printf("List is empty .. Please create a list is ==>");
     }
-    head=temp;
+    head=temp;// assing temp or newNode address to head ... This wil make my newNode as head ..
     printf("\ninside insert function ==> %d",head->data);
     printf("\n");
-    return head;
+    return head; // retrun the newNode address which is added at the front
 
 }
 
