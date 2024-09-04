@@ -37,7 +37,7 @@ struct InstertionOp*  insertAtFront(struct InstertionOp* head ){
     struct InstertionOp* temp;
     newNode=(struct InstertionOp*)malloc(sizeof(struct InstertionOp));
     newNode->link=NULL;
-    printf("Enter the data==>");
+    printf("Enter the data ==>");
     scanf("%d",&newNode->data);
     temp=head;
     if(head!=NULL){
@@ -46,10 +46,31 @@ struct InstertionOp*  insertAtFront(struct InstertionOp* head ){
     }else{
         printf("List is empty .. Please create a list is ==>");
     }
-    head=temp;// assing temp or newNode address to head ... This wil make my newNode as head ..
-    printf("\ninside insert function ==> %d",head->data);
+       
+    printf("After Insert new node==>\n");
+    head=temp;
+
+    while (temp!=NULL){
+    printf("%d\t",temp->data);
+    temp=temp->link;
+    }
+    printf("Null");           
+    printf("\nthis is head data inside func %d\t",head->data);
+    // printf("\ninside insert function ==> %d",head->data);
     printf("\n");
     return head; // retrun the newNode address which is added at the front
+
+}
+/* Code to get the lenght of the linked-list */
+int getLength(struct InstertionOp* head) {
+    int length=0;
+    struct InstertionOp* current=head;
+    while (current!=NULL)
+    {
+        length++;
+        current=current->link;
+    }
+    return length; 
 
 }
 
@@ -66,12 +87,51 @@ void traverseList(struct InstertionOp* head ){
 }
 
 
+
+/* Insert at given position */
+struct InstertionOp* insertAtPerticularPosition(struct InstertionOp* head){
+    struct InstertionOp* newNode , *temp;
+    int pos,length,i=1;
+    length=getLength(head);
+    printf("Enter the position where you want to insert the data ==> ");
+    scanf("%d",&pos);
+    if(pos==1){
+        return insertAtFront( head);
+    }else if(pos>1 && pos<length){
+        newNode=(struct InstertionOp* )malloc(sizeof(struct InstertionOp));
+        temp=head;//100 in temp
+        printf("\nEnter the data==>");
+        scanf("%d",&newNode->data);
+        while (pos>i)//1.2>1 || 2. 2>2 false
+        {
+           
+            temp=temp->link;// 200 in temp
+            i++;//i is incremented to 2
+
+        }
+           
+        // temp=200 now
+        newNode->link=temp->link;
+        temp->link=newNode;
+        
+    }else
+    {
+        printf("\nInvalid position\n");
+    }
+     printf("\n");
+    
+    
+    traverseList(head);
+    
+}
+
+
 int main() {
     struct InstertionOp* head = NULL;
     struct InstertionOp* temp;
     int ch;
     while (1){
-        printf("\n1.Insert\n2.Traverse\n3.Insert at start\n4.Insert at middel\n5.Insert at end\n6.Exit");
+        printf("\n1.Insert\n2.Traverse\n3.Insert at start\n4.Insert at given Position\n5.Insert at end\n6.Exit");
         printf("\n====================================");
         printf("\nEnter the choice==>");
         scanf("%d",&ch);
@@ -80,16 +140,11 @@ int main() {
         }else if(ch==2){
             traverseList(head);
         }else if(ch==3){
-            head =insertAtFront(head); // here  we store newNode address in left side of head variable ..
-            temp=head;
-            printf("Insert list==>\n");
-
-           while (temp!=NULL){
-            printf("%d\t",temp->data);
-            temp=temp->link;
-           }
-            printf("Null");           
-            printf("\nthis is head data %d\t",head->data);
+            insertAtFront(head); // here  we store newNode address in left side of head variable ..
+           
+        }else if(ch==4){
+            insertAtPerticularPosition(head);
+            
         }else if(ch==6){
             break;
         }else{
