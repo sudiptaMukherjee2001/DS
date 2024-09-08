@@ -55,7 +55,7 @@ struct InstertionOp*  insertAtFront(struct InstertionOp* head ){
     
     if(head!=NULL){
         newNode->link=head; // storing the head node address in the place of newNode Link and We estabhlish a link or connection between newNode with previous head node ..
-        head=newNode;// store newNode address to the temp  variable
+        head=newNode;// store newNode address to the head  variable
     }else{
         printf("List is empty .. Please create a list is ==>");
     }
@@ -64,7 +64,7 @@ struct InstertionOp*  insertAtFront(struct InstertionOp* head ){
 
 
     traverseList(head);
-    return head;
+    return head; // return new head address
 
 }
 /* Code to get the lenght of the linked-list */
@@ -126,6 +126,29 @@ struct InstertionOp* insertInGivenPosition(struct InstertionOp* head){
     
 }
 
+struct InstertionOp* insertEnd(struct InstertionOp* head){
+    struct InstertionOp* temp , *newNode;
+    temp=head;
+    newNode=(struct InstertionOp*)malloc(sizeof(struct InstertionOp));
+        printf("\nEnter the data\n");
+        scanf("%d",&newNode->data);   
+
+        if(temp==NULL){
+       printf("List is empty");
+        }else{  
+        while(temp->link!=NULL){
+            temp=temp->link;
+        }
+    
+        newNode->link=NULL;
+        temp->link= newNode;
+        }
+    
+    traverseList(head);
+    return head;
+
+}
+
 
 int main() {
     struct InstertionOp* head = NULL;
@@ -145,7 +168,10 @@ int main() {
            
         }else if(ch==4){
             head = insertInGivenPosition(head); 
-        }else if(ch==6){
+        }else if(ch==5){
+            head = insertEnd(head); 
+        }
+        else if(ch==6){
             break;
         }else{
             printf("Invalid choice");
