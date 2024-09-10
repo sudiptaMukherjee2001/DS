@@ -100,10 +100,11 @@ struct InstertionOp* insertInGivenPosition(struct InstertionOp* head){
         temp=head;
         printf("\nEnter the data==>");
         scanf("%d",&newNode->data);
-        while (pos-1>i && i<length )
+        while (pos - 1>i && i<length )  
         {
            
-            temp=temp->link;
+            temp=temp->link; 
+
             i++;
 
         }
