@@ -44,15 +44,99 @@ printf("Null");
 printf("\n======================================\n");
 printf("backward traversing\n");
 printf("NULL\t");
-while (tail!=NULL){
-    printf("%d\t",tail->data);
-    tail=tail->prev;
+// Use a temporary pointer to traverse backward, leaving `tail` unchanged
+    struct Doubly_linkedlist_prac* tempTail = tail;
+while (tempTail!=NULL){
+    printf("%d\t",tempTail->data);
+    tempTail=tempTail->prev;
 }
 printf("NULL");
+printf("\nHead data==> %d",head->data);
+printf("\n tail data==> %d",tail->data);
+
 }
 
+struct Doubly_linkedlist_prac* insertAtFront(struct Doubly_linkedlist_prac* head){
+    struct Doubly_linkedlist_prac* newNode , *temp;
+    if(head==NULL){
+        nodeCreation(head);
+    }else{
+        newNode=(struct Doubly_linkedlist_prac*)malloc(sizeof(struct Doubly_linkedlist_prac));
+        newNode->prev=NULL;
+        newNode->next=NULL;
+        printf("\nEnter the data\n");
+        scanf("%d",&newNode->data);
+        temp=head;
+       newNode->next=temp;
+       temp->prev=newNode;
+       head=newNode;        
+    }
+    printf("Node is successfuly added to the front");
+    return head;
+}
+int getLength(struct Doubly_linkedlist_prac* head){
+    int length=0;
+    struct Doubly_linkedlist_prac* temp=head;
+    while (temp!=NULL)
+    {
+        length++;
+        temp=temp->next;
+    }
+    return length;
 
+}
+struct Doubly_linkedlist_prac* insertInGivenPosition(struct Doubly_linkedlist_prac* head){
+    struct Doubly_linkedlist_prac* newNode , *temp;
+    int position,i=1;
+    int len=getLength(head);
+    if(head==NULL){
+        nodeCreation(head);
+    }else{
+        printf("Enter the posistion==>");
+        scanf("%d",&position);
+        if(position>i && position<len){
+            temp=head;
+            while (position>i){
+                temp=temp->next;
+                i++;
+            }
+            newNode=(struct Doubly_linkedlist_prac*)malloc(sizeof(struct Doubly_linkedlist_prac));
+            newNode->prev=NULL;
+            newNode->next=NULL;
+            printf("\nEnter the data\n");
+            scanf("%d",&newNode->data);
+            newNode->next=temp->prev->next;
+            newNode->prev=temp->prev;
+            temp->prev->next=newNode;
+            temp->prev=newNode;            
+        }else{
+            printf("Invalid position");
+        }
+        
+    }
+    printf("Node is successfuly added to the perticular position");
+    return head;
+}
 
+struct Doubly_linkedlist_prac* insertAtEnd(struct Doubly_linkedlist_prac* head){
+    if(head==NULL){
+        nodeCreation(head);
+    }else{
+        struct Doubly_linkedlist_prac* newNode;
+        newNode=(struct Doubly_linkedlist_prac*)malloc(sizeof(struct Doubly_linkedlist_prac));
+        newNode->next=NULL;
+        newNode->prev=NULL;
+        printf("\nEnter the data==>\n");
+        scanf("%d",&newNode->data);
+        tail->next=newNode;
+        newNode->prev=tail;
+        tail=newNode;// update the tail pointer
+
+    }
+    printf("Node is successfuly added to the end of the list");
+
+    return head;
+}
 int main(){
     struct Doubly_linkedlist_prac *head = NULL;
     int ch;
@@ -71,14 +155,14 @@ int main(){
             traverseList(head);
         }else if(ch==3){
           
-            // head = insertAtFront(head); // here  we store newNode address in left side of head variable ..
+            head = insertAtFront(head); // here  we store newNode address in left side of head variable ..
            
         }else if(ch==4){
             
-            // head = insertInGivenPosition(head); 
+            head = insertInGivenPosition(head); 
         }else if(ch==5){
-            "hi";
-            // head = insertEnd(head); 
+            
+            head = insertAtEnd(head); 
         }
         else if(ch==6){
             break;
