@@ -76,6 +76,52 @@ struct doubly_linkedList* insertAtFront(struct doubly_linkedList* head){
     return head;
 }
 
+int getLength(struct doubly_linkedList* head){
+    int length=0;
+    struct doubly_linkedList* temp=head;
+    while (temp!=NULL)
+    {
+        length++;
+        temp=temp->next;
+    }
+    return length;
+
+}
+
+/* Insert at given position */
+struct doubly_linkedList* insertInGivenPosition(struct doubly_linkedList* head){
+    struct doubly_linkedList* newNode , *temp;
+    int position ;
+    int i=1;
+   printf("Enter the position where you want to insert the data ==> ");
+    scanf("%d",&position);
+    int length= getLength(head);
+    if(position == 1 && position >length){
+        insertAtFront(head);
+
+    }
+    else if(position>1 && position < length){
+          newNode=(struct doubly_linkedList* )malloc(sizeof(struct doubly_linkedList));
+            temp=head;
+           printf("\nEnter the data==>");
+        scanf("%d",&newNode->data);
+        while (position>i && i<length )
+        {
+           temp=temp->next;
+           i++;
+        }
+        temp->prev->next=newNode;
+        newNode->prev=temp->prev;
+        newNode->next=temp;
+        temp->prev=newNode;
+
+    }
+    else{
+        printf("Invalid position");
+    }
+    return head;
+
+}
 
 int main(){
     int ch;
@@ -93,12 +139,12 @@ int main(){
         }else if(ch==2){
             traverseList(head);
         }else if(ch==3){
-            "hi";
+          
             head = insertAtFront(head); // here  we store newNode address in left side of head variable ..
            
         }else if(ch==4){
-            "hi";
-            // head = insertInGivenPosition(head); 
+            
+            head = insertInGivenPosition(head); 
         }else if(ch==5){
             "hi";
             // head = insertEnd(head); 
