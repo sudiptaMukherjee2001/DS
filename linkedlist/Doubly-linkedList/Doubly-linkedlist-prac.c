@@ -9,6 +9,8 @@ struct  Doubly_linkedlist_prac
     struct Doubly_linkedlist_prac *prev;
 } *tail;
 
+/* node creation */
+
 struct Doubly_linkedlist_prac* nodeCreation(struct Doubly_linkedlist_prac* head){
     struct Doubly_linkedlist_prac* newNode;
     newNode=(struct Doubly_linkedlist_prac*)malloc(sizeof(struct Doubly_linkedlist_prac));
@@ -32,7 +34,7 @@ struct Doubly_linkedlist_prac* nodeCreation(struct Doubly_linkedlist_prac* head)
     }    
     return head;
 }
-
+/* traversing the list */
 void traverseList(struct Doubly_linkedlist_prac* head){
 struct Doubly_linkedlist_prac* temp=head;
 printf("Null\t");
@@ -55,7 +57,7 @@ printf("\nHead data==> %d",head->data);
 printf("\n tail data==> %d",tail->data);
 
 }
-
+/* add the node at front */
 struct Doubly_linkedlist_prac* insertAtFront(struct Doubly_linkedlist_prac* head){
     struct Doubly_linkedlist_prac* newNode , *temp;
     if(head==NULL){
@@ -74,6 +76,7 @@ struct Doubly_linkedlist_prac* insertAtFront(struct Doubly_linkedlist_prac* head
     printf("Node is successfuly added to the front");
     return head;
 }
+/* get the length of the list */
 int getLength(struct Doubly_linkedlist_prac* head){
     int length=0;
     struct Doubly_linkedlist_prac* temp=head;
@@ -85,6 +88,7 @@ int getLength(struct Doubly_linkedlist_prac* head){
     return length;
 
 }
+/* add the node at given position */
 struct Doubly_linkedlist_prac* insertInGivenPosition(struct Doubly_linkedlist_prac* head){
     struct Doubly_linkedlist_prac* newNode , *temp;
     int position,i=1;
@@ -117,7 +121,7 @@ struct Doubly_linkedlist_prac* insertInGivenPosition(struct Doubly_linkedlist_pr
     printf("Node is successfuly added to the perticular position");
     return head;
 }
-
+/* Add the node at the end */
 struct Doubly_linkedlist_prac* insertAtEnd(struct Doubly_linkedlist_prac* head){
     if(head==NULL){
         nodeCreation(head);
@@ -137,6 +141,7 @@ struct Doubly_linkedlist_prac* insertAtEnd(struct Doubly_linkedlist_prac* head){
 
     return head;
 }
+/* findind the elements */
 int findElement(struct Doubly_linkedlist_prac* head){
     int key;
     struct Doubly_linkedlist_prac* temp;
