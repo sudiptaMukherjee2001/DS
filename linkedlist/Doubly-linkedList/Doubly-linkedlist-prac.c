@@ -137,7 +137,43 @@ struct Doubly_linkedlist_prac* insertAtEnd(struct Doubly_linkedlist_prac* head){
 
     return head;
 }
+int findElement(struct Doubly_linkedlist_prac* head){
+    int key;
+    struct Doubly_linkedlist_prac* temp;
+    printf("\nEnter the element you want to find==> \t");
+    scanf("%d",&key);
+    if(head==NULL){
+        printf("List is empty");
+    }else{
+        temp=head;
+        // key is found in head node
+        if(key==temp->data){
+            printf("\nElement found in the head and searched element is %d\n",temp->data);
+             return 1;
+        } 
+        else {
+            while (temp!=NULL)
+            {                
+                if(temp->data==key){
+                    printf("\nElement found in the list and searched element is %d\n",temp->data);
+                   break;
+                }
+                temp=temp->next;
+            }
+            // After the last node if temp = null that means we did not find the element in the list..
+            if (temp==NULL)
+            {
+                printf("\nElement not found in the list!!!!\n");
+            }
+                    
+        }
+        
+    }
+    
+}
+
 int main(){
+
     struct Doubly_linkedlist_prac *head = NULL;
     int ch;
     
@@ -145,7 +181,7 @@ int main(){
     while (1)
     {
         printf("\nDOUBLY LINKED LIST\n");
-        printf("\n1.Insert\n2.Traverse\n3.Insert at start\n4.Insert at given Position\n5.Insert at end\n6.Exit");
+        printf("\n1.Insert\n2.Traverse\n3.Insert at start\n4.Insert at given Position\n5.Insert at end\n6.Search a perticuler data\n7.Exit");
         printf("\n====================================");
         printf("\nEnter the choice==>");
         scanf("%d",&ch);
@@ -165,6 +201,10 @@ int main(){
             head = insertAtEnd(head); 
         }
         else if(ch==6){
+            
+             findElement(head); 
+        }
+        else if(ch==7){
             break;
         }else{
             printf("Invalid choice");
