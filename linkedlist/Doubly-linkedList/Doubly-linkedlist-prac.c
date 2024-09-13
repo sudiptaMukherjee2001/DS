@@ -33,6 +33,9 @@ struct dll* nodeCreation(struct dll* head){
     if(head==NULL){
         head=newNode;
         tail=newNode;
+
+
+        
     }else
     {
         struct dll* temp=head;
