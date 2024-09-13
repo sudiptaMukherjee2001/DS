@@ -1,29 +1,41 @@
 #include<stdio.h>
 #include<stdlib.h>
-
-
-struct  Doubly_linkedlist_prac
+struct  dll
 {
-    int data;
-    struct Doubly_linkedlist_prac *next;
-    struct Doubly_linkedlist_prac *prev;
+    int movieId;
+    char movieName[50];
+    float ratings;
+    struct dll *next;
+    struct dll *prev;
 } *tail;
 
 /* node creation */
-
-struct Doubly_linkedlist_prac* nodeCreation(struct Doubly_linkedlist_prac* head){
-    struct Doubly_linkedlist_prac* newNode;
-    newNode=(struct Doubly_linkedlist_prac*)malloc(sizeof(struct Doubly_linkedlist_prac));
+struct dll* nodeCreation(struct dll* head){
+    struct dll* newNode;
+    float rating;
+    newNode=(struct dll*)malloc(sizeof(struct dll));
     newNode->next=NULL;
     newNode->prev=NULL;
-    printf("\nEnter the data==> \n");
-    scanf("%d",&newNode->data);
+    printf("\nEnter the movieId==> \t");
+    scanf("%d",&newNode->movieId);
+    printf("\nEnter the movieName==> \t");
+    scanf("%s",&newNode->movieName);
+    
+    printf("\nEnter the ratings==> \t");
+    scanf("%2f",&rating);
+    if(rating<=5){
+    // printf("%f",rating);
+    newNode->ratings=rating;
+    }else{
+        printf("\nPlease provied Rating between between 0 to 5\n");
+    }
+    
     if(head==NULL){
         head=newNode;
         tail=newNode;
     }else
     {
-        struct Doubly_linkedlist_prac* temp=head;
+        struct dll* temp=head;
         while (temp->next!=NULL)
         {
             temp=temp->next;
@@ -35,35 +47,38 @@ struct Doubly_linkedlist_prac* nodeCreation(struct Doubly_linkedlist_prac* head)
     return head;
 }
 /* traversing the list */
-void traverseList(struct Doubly_linkedlist_prac* head){
-struct Doubly_linkedlist_prac* temp=head;
-printf("Null\t");
+void traverseList(struct dll* head){
+struct dll* temp=head;
+printf("Movie Details==>\n");
 while (temp!=NULL){
-    printf("%d\t",temp->data);
+    printf("Movie id==> %d  \t ",temp->movieId);
+    printf("Movie name==> %s \t",temp->movieName);
+    printf("Movie ratings=> %.2f  \t",temp->ratings);
+    printf("\n");
     temp=temp->next;
 }
-printf("Null");
+/* printf("Null");
 printf("\n======================================\n");
 printf("backward traversing\n");
-printf("NULL\t");
+printf("NULL\t"); */
 // Use a temporary pointer to traverse backward, leaving `tail` unchanged
-    struct Doubly_linkedlist_prac* tempTail = tail;
+/*     struct dll* tempTail = tail;
 while (tempTail!=NULL){
     printf("%d\t",tempTail->data);
     tempTail=tempTail->prev;
 }
 printf("NULL");
 printf("\nHead data==> %d",head->data);
-printf("\n tail data==> %d",tail->data);
+printf("\n tail data==> %d",tail->data); */
 
 }
 /* add the node at front */
-struct Doubly_linkedlist_prac* insertAtFront(struct Doubly_linkedlist_prac* head){
-    struct Doubly_linkedlist_prac* newNode , *temp;
+/* struct dll* insertAtFront(struct dll* head){
+    struct dll* newNode , *temp;
     if(head==NULL){
         nodeCreation(head);
     }else{
-        newNode=(struct Doubly_linkedlist_prac*)malloc(sizeof(struct Doubly_linkedlist_prac));
+        newNode=(struct dll*)malloc(sizeof(struct dll));
         newNode->prev=NULL;
         newNode->next=NULL;
         printf("\nEnter the data\n");
@@ -75,11 +90,11 @@ struct Doubly_linkedlist_prac* insertAtFront(struct Doubly_linkedlist_prac* head
     }
     printf("Node is successfuly added to the front");
     return head;
-}
+} */
 /* get the length of the list */
-int getLength(struct Doubly_linkedlist_prac* head){
+/* int getLength(struct dll* head){
     int length=0;
-    struct Doubly_linkedlist_prac* temp=head;
+    struct dll* temp=head;
     while (temp!=NULL)
     {
         length++;
@@ -87,10 +102,10 @@ int getLength(struct Doubly_linkedlist_prac* head){
     }
     return length;
 
-}
+} */
 /* add the node at given position */
-struct Doubly_linkedlist_prac* insertInGivenPosition(struct Doubly_linkedlist_prac* head){
-    struct Doubly_linkedlist_prac* newNode , *temp;
+/* struct dll* insertInGivenPosition(struct dll* head){
+    struct dll* newNode , *temp;
     int position,i=1;
     int len=getLength(head);
     if(head==NULL){
@@ -104,7 +119,7 @@ struct Doubly_linkedlist_prac* insertInGivenPosition(struct Doubly_linkedlist_pr
                 temp=temp->next;
                 i++;
             }
-            newNode=(struct Doubly_linkedlist_prac*)malloc(sizeof(struct Doubly_linkedlist_prac));
+            newNode=(struct dll*)malloc(sizeof(struct dll));
             newNode->prev=NULL;
             newNode->next=NULL;
             printf("\nEnter the data\n");
@@ -120,14 +135,14 @@ struct Doubly_linkedlist_prac* insertInGivenPosition(struct Doubly_linkedlist_pr
     }
     printf("Node is successfuly added to the perticular position");
     return head;
-}
+} */
 /* Add the node at the end */
-struct Doubly_linkedlist_prac* insertAtEnd(struct Doubly_linkedlist_prac* head){
+/* struct dll* insertAtEnd(struct dll* head){
     if(head==NULL){
         nodeCreation(head);
     }else{
-        struct Doubly_linkedlist_prac* newNode;
-        newNode=(struct Doubly_linkedlist_prac*)malloc(sizeof(struct Doubly_linkedlist_prac));
+        struct dll* newNode;
+        newNode=(struct dll*)malloc(sizeof(struct dll));
         newNode->next=NULL;
         newNode->prev=NULL;
         printf("\nEnter the data==>\n");
@@ -140,11 +155,11 @@ struct Doubly_linkedlist_prac* insertAtEnd(struct Doubly_linkedlist_prac* head){
     printf("Node is successfuly added to the end of the list");
 
     return head;
-}
+} */
 /* findind the elements */
-int findElement(struct Doubly_linkedlist_prac* head){
+/* int findElement(struct dll* head){
     int key;
-    struct Doubly_linkedlist_prac* temp;
+    struct dll* temp;
     printf("\nEnter the element you want to find==> \t");
     scanf("%d",&key);
     if(head==NULL){
@@ -175,18 +190,68 @@ int findElement(struct Doubly_linkedlist_prac* head){
         
     }
     
-}
+} */
+/* Search movie details by their id */
+int findElement(struct dll* head){
+    int searchId;
+    struct dll* temp;
+    printf("\nEnter the element you want to find==> \t");
+    scanf("%d",&searchId);
+    if(head==NULL){
+        printf("List is empty");
+    }else{
+        temp=head;
+        // key is found in head node
+        if(searchId==temp->movieId){
+            printf("\nElement found in the head and searched element is %s",temp->movieName);
+             return 1;
+        } 
+        else {
+            while (temp!=NULL)
+            {                
+                if(temp->movieId==searchId){
+                    printf("\nElement found in the list and searched element is %s \n",temp->movieName);
+                   break;
+                }
+                temp=temp->next;
+            }
+            // After the last node if temp = null that means we did not find the element in the list..
+            if (temp==NULL)
+            {
+                printf("\nElement not found in the list!!!!\n");
+            }
+                    
+        }
+        
+    }
+    
+} 
 
-int main(){
+/* Lab=> find movie by their ratings */
+void findBestMovie(struct dll* head){
 
-    struct Doubly_linkedlist_prac *head = NULL;
-    int ch;
+    struct dll* temp=head;
+        printf("\nWow!!!! You choosed best movies from our list\n");
+    while (temp!=NULL)
+    {     
+    if(temp->ratings>=4 && temp->ratings<=5){
+        printf("\nMovie Id: %d",temp->movieId);
+        printf("\nMovie Name: %s",temp->movieName);
+        printf("\nMovie Ratings: %.2f\n",temp->ratings);
+
+    }
+    temp=temp->next;
+    }
     
 
+}
+int main(){
+    struct dll *head = NULL;
+    int ch;   
     while (1)
     {
         printf("\nDOUBLY LINKED LIST\n");
-        printf("\n1.Insert\n2.Traverse\n3.Insert at start\n4.Insert at given Position\n5.Insert at end\n6.Search a perticuler data\n7.Exit");
+        printf("\n1.Insert\n2.Traverse\n3.Insert at start\n4.Insert at given Position\n5.Insert at end\n6.Search a perticuler data\n7.Find movie which is between 4 to 5 ratings\n8.Exit");
         printf("\n====================================");
         printf("\nEnter the choice==>");
         scanf("%d",&ch);
@@ -196,26 +261,27 @@ int main(){
             traverseList(head);
         }else if(ch==3){
           
-            head = insertAtFront(head); // here  we store newNode address in left side of head variable ..
+            //head = insertAtFront(head); // here  we store newNode address in left side of head variable ..
            
         }else if(ch==4){
             
-            head = insertInGivenPosition(head); 
+            //head = insertInGivenPosition(head); 
         }else if(ch==5){
             
-            head = insertAtEnd(head); 
+            //head = insertAtEnd(head); 
         }
         else if(ch==6){
             
              findElement(head); 
         }
         else if(ch==7){
-            break;
-        }else{
-            printf("Invalid choice");
+           findBestMovie(head); 
         }
-        
-    }
-    
-
+        else if(ch==8){
+            break;
+        }
+        else{
+            printf("Invalid choice");
+        }        
+    }  
 }
