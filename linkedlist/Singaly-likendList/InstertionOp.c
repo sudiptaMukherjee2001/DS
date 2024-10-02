@@ -1,184 +1,195 @@
 #include <stdio.h>
-#include<stdlib.h>
+#include <stdlib.h>
 
 /* Create a sturcture */
 struct InstertionOp
 {
     int data;
-   struct InstertionOp* link;
+    struct InstertionOp *link;
 };
 
-struct InstertionOp* nodeCreation(struct InstertionOp* head){ // head will contain the address
+struct InstertionOp *linkCreation(struct InstertionOp *head)
+{ // head will contain the address
 
-struct InstertionOp *newNode , *temp;
-newNode=(struct InstertionOp*)malloc(sizeof(struct InstertionOp));
-newNode->link=NULL;
-printf("Enter the data==>");
-scanf("%d",&newNode->data);
+    struct InstertionOp *newNode, *temp;
+    newNode = (struct InstertionOp *)malloc(sizeof(struct InstertionOp));
+    newNode->link = NULL;
+    printf("Enter the data==>");
+    scanf("%d", &newNode->data);
 
-if(head==NULL){
-    head=newNode;
-}else{
-temp=head;
-// traversing to the end of the list
-while (temp->link!= NULL){
-    temp=temp->link;
+    if (head == NULL)
+    {
+        head = newNode;
+    }
+    else
+    {
+        temp = head;
+        // traversing to the end of the list
+        while (temp->link != NULL)
+        {
+            temp = temp->link;
+        }
+        temp->link = newNode;
+    }
+    return head;
 }
-temp->link=newNode;
-}
-return head;
 
-}
+void traverseList(struct InstertionOp *head)
+{
 
-void traverseList(struct InstertionOp* head ){
-
-    struct InstertionOp* temp;
-    temp=head;
+    struct InstertionOp *temp;
+    temp = head;
     printf("\nList data==>\n");
-    while (temp!=NULL){
-        printf("%d\t",temp->data);
-        temp=temp->link;        
+    while (temp != NULL)
+    {
+        printf("%d\t", temp->data);
+        temp = temp->link;
     }
     printf("Null");
-    
 }
 
-
-
-struct InstertionOp*  insertAtFront(struct InstertionOp* head ){
-    struct InstertionOp* newNode;
-    struct InstertionOp* temp;
-    newNode=(struct InstertionOp*)malloc(sizeof(struct InstertionOp));
-    newNode->link=NULL;
+struct InstertionOp *insertAtFront(struct InstertionOp *head)
+{
+    struct InstertionOp *newNode;
+    struct InstertionOp *temp;
+    newNode = (struct InstertionOp *)malloc(sizeof(struct InstertionOp));
+    newNode->link = NULL;
     printf("Enter the data ==>");
-    scanf("%d",&newNode->data);
-    
-    if(head!=NULL){
-        newNode->link=head; // storing the head node address in the place of newNode Link and We estabhlish a link or connection between newNode with previous head node ..
-        head=newNode;// store newNode address to the head  variable
-    }else{
+    scanf("%d", &newNode->data);
+
+    if (head != NULL)
+    {
+        newNode->link = head; // storing the head node address in the place of newNode Link and We estabhlish a link or connection between newNode with previous head node ..
+        head = newNode;       // store newNode address to the head  variable
+    }
+    else
+    {
         printf("List is empty .. Please create a list is ==>");
     }
-       
-    printf("After Insert new node==>\n");
 
+    printf("After Insert new node==>\n");
 
     traverseList(head);
     return head; // return new head address
-
 }
 /* Code to get the lenght of the linked-list */
-int getLength(struct InstertionOp* head) {
-    int length=0;
-    struct InstertionOp* current=head;
-    while (current!=NULL)
+int getLength(struct InstertionOp *head)
+{
+    int length = 0;
+    struct InstertionOp *current = head;
+    while (current != NULL)
     {
         length++;
-        current=current->link;
-    
-
+        current = current->link;
     }
-    return length; 
-
+    return length;
 }
 
-
-
-
 /* Insert at given position */
-struct InstertionOp* insertInGivenPosition(struct InstertionOp* head){
-    struct InstertionOp* newNode , *temp;
-    int pos,length,i=1;
-    length=getLength(head);
-    printf("\nlength of linked list %d\n",length);
+struct InstertionOp *insertInGivenPosition(struct InstertionOp *head)
+{
+    struct InstertionOp *newNode, *temp;
+    int pos, length, i = 1;
+    length = getLength(head);
+    printf("\nlength of linked list %d\n", length);
     printf("Enter the position where you want to insert the data ==> ");
-    scanf("%d",&pos);
-    if(pos==1){
-        return insertAtFront( head);
-    }else if(pos>1 && pos<=length){
-        newNode=(struct InstertionOp* )malloc(sizeof(struct InstertionOp));
-        temp=head;
+    scanf("%d", &pos);
+    if (pos == 1)
+    {
+        return insertAtFront(head);
+    }
+    else if (pos > 1 && pos <= length)
+    {
+        newNode = (struct InstertionOp *)malloc(sizeof(struct InstertionOp));
+        temp = head;
         printf("\nEnter the data==>");
-        scanf("%d",&newNode->data);
-        while (pos - 1>i && i<length )  
+        scanf("%d", &newNode->data);
+        while (pos - 1 > i)
         {
-           
-            temp=temp->link; 
+
+            temp = temp->link;
 
             i++;
-
         }
 
-           
-       
-        newNode->link=temp->link;
-        temp->link=newNode;
-        
+        newNode->link = temp->link;
+        temp->link = newNode;
     }
     else
     {
         printf("\nInvalid position\n");
     }
-     printf("\n");
-    
-    
+    printf("\n");
+
     traverseList(head);
     return head;
-    
 }
 
-struct InstertionOp* insertEnd(struct InstertionOp* head){
-    struct InstertionOp* temp , *newNode;
-    temp=head;
-    newNode=(struct InstertionOp*)malloc(sizeof(struct InstertionOp));
-        printf("\nEnter the data\n");
-        scanf("%d",&newNode->data);   
+struct InstertionOp *insertEnd(struct InstertionOp *head)
+{
+    struct InstertionOp *temp, *newNode;
+    temp = head;
+    newNode = (struct InstertionOp *)malloc(sizeof(struct InstertionOp));
+    printf("\nEnter the data\n");
+    scanf("%d", &newNode->data);
 
-        if(temp==NULL){
-       printf("List is empty");
-        }else{  
-        while(temp->link!=NULL){
-            temp=temp->link;
+    if (temp == NULL)
+    {
+        printf("List is empty");
+    }
+    else
+    {
+        while (temp->link != NULL)
+        {
+            temp = temp->link;
         }
-    
-        newNode->link=NULL;
-        temp->link= newNode;
-        }
-    
+
+        newNode->link = NULL;
+        temp->link = newNode;
+    }
+
     traverseList(head);
     return head;
-
 }
 
-
-int main() {
-    struct InstertionOp* head = NULL;
-    struct InstertionOp* temp;
+int main()
+{
+    struct InstertionOp *head = NULL;
+    struct InstertionOp *temp;
     int ch;
-    while (1){
+    while (1)
+    {
         printf("\n1.Insert\n2.Traverse\n3.Insert at start\n4.Insert at given Position\n5.Insert at end\n6.Exit");
         printf("\n====================================");
         printf("\nEnter the choice==>");
-        scanf("%d",&ch);
-        if(ch==1){
-            head=nodeCreation(head);
-        }else if(ch==2){
-            traverseList(head);
-        }else if(ch==3){
-             head = insertAtFront(head); // here  we store newNode address in left side of head variable ..
-           
-        }else if(ch==4){
-            head = insertInGivenPosition(head); 
-        }else if(ch==5){
-            head = insertEnd(head); 
+        scanf("%d", &ch);
+        if (ch == 1)
+        {
+            head = linkCreation(head);
         }
-        else if(ch==6){
+        else if (ch == 2)
+        {
+            traverseList(head);
+        }
+        else if (ch == 3)
+        {
+            head = insertAtFront(head); // here  we store newNode address in left side of head variable ..
+        }
+        else if (ch == 4)
+        {
+            head = insertInGivenPosition(head);
+        }
+        else if (ch == 5)
+        {
+            head = insertEnd(head);
+        }
+        else if (ch == 6)
+        {
             break;
-        }else{
+        }
+        else
+        {
             printf("Invalid choice");
         }
-        
     }
-    
-  
 }
