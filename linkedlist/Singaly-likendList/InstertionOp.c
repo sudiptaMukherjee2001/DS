@@ -104,6 +104,7 @@ struct InstertionOp *insertInGivenPosition(struct InstertionOp *head)
         temp = head;
         printf("\nEnter the data==>");
         scanf("%d", &newNode->data);
+        // traversing the temp variable
         while (pos - 1 > i)
         {
 
