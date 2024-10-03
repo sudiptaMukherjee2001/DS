@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-char infix[] = "A+b(c*d)/E";
+char infix[] = "a+b-c*d/e";
 char str_postFix_exp[100]; // Stack for storing the operators , operands...
 char postFix[100];         // Output postfix expression
 
@@ -13,7 +13,18 @@ int precedence(char ch)
     if (ch == '+' || ch == '-')
         return 1;
     if (ch == '*' || ch == '/')
-        return 2;
+    {
+
+        if (ch == '*')
+        {
+            return 2;
+        }
+        else
+        {
+            return 3;
+        }
+    }
+
     return 0;
 }
 
