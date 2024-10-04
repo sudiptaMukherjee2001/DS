@@ -38,7 +38,8 @@ void convert_infix_to_postFix(char *input, int length)
             // Pop operators from stack with higher or equal precedence and add them to postfix
             while (top != -1 && precedence(str_postFix_exp[top]) >= precedence(input[i]))
             {
-                postFix[postfixIndex++] = str_postFix_exp[top--]; // pop
+                postFix[postfixIndex++] = str_postFix_exp[top]; // pop
+                top--;
             }
             // Push the current operator to the stack
             top++;
