@@ -6,67 +6,107 @@ struct binaryTreeNode
     int data;
     struct binaryTreeNode *left;
     struct binaryTreeNode *right;
-};
+} *root;
 
-struct binaryTreeNode *createNode()
+struct binaryTreeNode *createInsertNode(struct binaryTreeNode *root)
 {
-    int x;
     char ch;
-    struct binaryTreeNode *newNode = (struct binaryTreeNode *)malloc(sizeof(struct binaryTreeNode));
-    printf("\nEnter the data=>");
-    scanf("%d", &newNode->data);
-    newNode->left = 0;
-    newNode->right = 0;
-printf("\nIf you do not want create any further node then press  :=>-1\n
-        If you want to create any further node then press :=> 1\t");
-scanf("%d",&x);
-if(x==-1){
-        return newNode;
-}else{
-    printf("\nIf you want to add to the left then press  :=>L\n
-        If you want to add to the Right then press :=>R\n       
-        ");
-    scanf("%c",&ch);
-    switch (ch)
+    if (root == NULL)
     {
-        case 'L':
-            newNode->left = createNode();
-            break;
-        case 'R':
-            newNode->right = createNode();
-            break;
-        // case "E":
-        //     return newNode;
-        default:
-            printf("\nInvalid choice");
-            break;
+        root = (struct binaryTreeNode *)malloc(sizeof(struct binaryTreeNode));
+        root->left = NULL;
+        root->right = NULL;
+        printf("\nEnter the data==>\n");
+        scanf("%d", &root->data);
+        return root;
     }
-}
-return newNode;
+    else
+    {
+        printf("\nWrite L for left node insert of data %d\n", root->data);
+        printf("\nWrite R for right node insert %d\n", root->data);
+        scanf(" %c", &ch);
+        switch (ch)
+        {
+        case 'l':
+
+            root->left = createInsertNode(root->left);
+            break;
+        case 'r':
+
+            root->right = createInsertNode(root->right);
+            break;
+
+        default:
+            printf("\nInvalid choice\n");
+            break;
+        }
+    }
+
+    return root;
 }
 
-void main()
+void preOrderTraversal(struct binaryTreeNode *root)
 {
 
-    struct binaryTreeNode *root = 0;
+    if (root == NULL)
+    {
+        return;
+    }
+    printf("%d ", root->data);
+    preOrderTraversal(root->left);
+    preOrderTraversal(root->right);
+}
+void inOrderTraversal(struct binaryTreeNode *root)
+{
+
+    if (root == NULL)
+    {
+        return;
+    }
+    inOrderTraversal(root->left);
+    printf("%d ", root->data);
+    inOrderTraversal(root->right);
+}
+void postOrderTraversal(struct binaryTreeNode *root)
+{
+
+    if (root == NULL)
+    {
+        return;
+    }
+    postOrderTraversal(root->left);
+    postOrderTraversal(root->right);
+    printf("%d ", root->data);
+}
+
+int main()
+{
+
+    root = NULL;
     while (1)
     {
-        printf("\n1.create and insert the node\n 2.pre-Order traversal\n 3.post-Order traversal \n 4.In-Order traversal\n5.Exit");
+        printf("\n1.create and insert the node\n 2.pre-Order traversal\n 3.post-Order traversal \n 4.In-Order traversal\n5.Exit\n");
         int choice;
         scanf("%d", &choice);
         switch (choice)
         {
         case 1:
-            root = createNode();
+            root = createInsertNode(root);
             break;
         case 2:
-            // preOrderTraversal(root);
+            printf("\n PreOrderTraversal==>\n");
+
+            preOrderTraversal(root);
             break;
         case 3:
-            // postOrderTraversal(root);
+            printf("\n PostOrderTraversal==>\n");
+
+            postOrderTraversal(root);
             break;
         case 4:
-            // inOrderTraversal(root);
+            printf("\n InOrderTraversal==>\n");
+
+            inOrderTraversal(root);
             break;
         case 5:
             return 0;
