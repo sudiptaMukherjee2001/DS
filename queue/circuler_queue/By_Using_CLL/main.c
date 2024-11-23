@@ -48,9 +48,8 @@ struct nodeStruct *dequeue()
         front = NULL;
         rear = NULL;
     }
-    1
 
-        else
+    else
     {
         printf("Front value before delete==>%d", front->data);
         rear->link = temp->link;
@@ -70,7 +69,8 @@ void display()
     }
 
     printf("\n front==>%d\n", front->data);
-    printf("\nrear==>%d\n", rear->link->data); // this will print the first ele of the the first node because it successfuly created a link from rear->link to front node..
+    printf("\nrear==%d\n", rear->data);
+    printf("\nrear->link->data==%d\n", rear->link->data); // this will print the first ele of the the first node because it successfuly created a link from rear->link to front node..
     do
     {
         printf("\nData==>%d", temp->data);
